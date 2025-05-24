@@ -1,0 +1,60 @@
+<div class="contenedor">
+  <div class="fila">
+    <div class="columna-30">
+      <h3>Nuevo Préstamo</h3>
+      <form [formGroup]="prestamoForm" (ngSubmit)="onSubmit()">
+        <select formControlName="libro" required>
+          <option value="" disabled>Selecciona un libro</option>
+          <option *ngFor="let libro of libros" [value]="libro.id">{{ libro.titulo }}</option>
+        </select>
+
+        <select formControlName="usuario" required>
+          <option value="" disabled>Selecciona un usuario</option>
+          <option *ngFor="let usuario of usuarios" [value]="usuario.id">{{ usuario.nombres }}</option>
+        </select>
+
+        <input type="date" formControlName="fechaPrestamo" required />
+        <input type="date" formControlName="fechaDevolucion" required />
+        
+        <select formControlName="estado" required>
+          <option value="pendiente">Pendiente</option>
+          <option value="devuelto">Devuelto</option>
+        </select>
+
+        <button type="submit" class="enviar" [disabled]="!prestamoForm.valid">
+          {{ editMode ? 'Editar' : 'Agregar' }} Préstamo
+        </button>
+        <button type="button" class="cancelar" (click)="resetForm()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="columna-70">
+    <h3>Lista de Préstamos</h3>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Libro</th>
+          <th>Usuario</th>
+          <th>Fecha de Préstamo</th>
+          <th>Fecha de Devolución</th>
+          <th>Estado</th>
+          <th style="text-align: center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let prestamo of prestamos">
+          <td>{{ prestamo.libro }}</td>
+          <td>{{ prestamo.usuario }}</td>
+          <td>{{ prestamo.fechaPrestamo }}</td>
+          <td>{{ prestamo.fechaDevolucion }}</td>
+          <td>{{ prestamo.estado }}</td>
+          <td style="text-align: center">
+            <button class="editar" (click)="onEdit(prestamo)">Editar</button>
+            <button class="eliminar" (click)="onDelete(prestamo.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

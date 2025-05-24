@@ -1,0 +1,43 @@
+<div class="contenedor">
+    <div class="fila">
+        <div class="columna-30">
+            <h3>Nuevo Usuario</h3>
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <input type="text" formControlName="nombres" placeholder="Nombres" required />
+                <input type="text" formControlName="telefono" placeholder="Teléfono" required />
+                <input type="email" formControlName="email" placeholder="Email" required />
+                <button type="submit" class="enviar" [disabled]="!userForm.valid">
+                    {{ editMode ? 'Editar' : 'Agregar' }} usuario
+                </button>
+                <button type="button" class="cancelar" (click)="resetForm()">
+                    Cancelar
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="columna-70">
+        <h3>Lista de Usuarios</h3>
+        <table class="tabla">
+            <thead>
+                <tr>
+                    <th>Nombres</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                    <th style="text-align: center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nombres}}</td>
+                    <td>{{usuario.telefono}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td style="text-align: center">
+                        <button class="editar" (click)="onEdit(usuario)">Editar</button>
+                        <button class="eliminar" (click)="onDelete(usuario.id)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>  
+

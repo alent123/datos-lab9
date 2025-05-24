@@ -1,0 +1,67 @@
+<div class="contenedor">
+  <div class="fila">
+    <div class="columna-30">
+      <h3>Nuevo Libro</h3>
+      <form [formGroup]="libroForm" (ngSubmit)="onSubmit()">
+        <input type="text" formControlName="titulo" placeholder="Título" required />
+        <div *ngIf="libroForm.get('titulo')?.invalid && libroForm.get('titulo')?.touched" class="error">
+          El título es obligatorio.
+        </div>
+
+        <input type="text" formControlName="isbn" placeholder="ISBN (13 dígitos)" required />
+        <div *ngIf="libroForm.get('isbn')?.invalid && libroForm.get('isbn')?.touched" class="error">
+          ISBN debe tener exactamente 13 dígitos numéricos.
+        </div>
+
+        <input type="number" formControlName="anio" placeholder="Año" required />
+        <div *ngIf="libroForm.get('anio')?.invalid && libroForm.get('anio')?.touched" class="error">
+          Año debe tener 4 dígitos.
+        </div>
+
+        <textarea formControlName="sinopsis" placeholder="Sinopsis" required></textarea>
+        <div *ngIf="libroForm.get('sinopsis')?.invalid && libroForm.get('sinopsis')?.touched" class="error">
+          La sinopsis es obligatoria.
+        </div>
+
+        <input type="text" formControlName="genero" placeholder="Género" required />
+        <div *ngIf="libroForm.get('genero')?.invalid && libroForm.get('genero')?.touched" class="error">
+          El género es obligatorio.
+        </div>
+
+        <button type="submit" class="enviar" [disabled]="!libroForm.valid">
+          {{ editMode ? 'Editar' : 'Agregar' }} Libro
+        </button>
+        <button type="button" class="cancelar" (click)="resetForm()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="columna-70">
+    <h3>Lista de Libros</h3>
+    <table class="tabla">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>ISBN</th>
+          <th>Año</th>
+          <th>Género</th>
+          <th>Sinopsis</th>
+          <th style="text-align: center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let libro of libros">
+          <td>{{ libro.titulo }}</td>
+          <td>{{ libro.isbn }}</td>
+          <td>{{ libro.anio }}</td>
+          <td>{{ libro.genero }}</td>
+          <td>{{ libro.sinopsis }}</td>
+          <td style="text-align: center">
+            <button class="editar" (click)="onEdit(libro)">Editar</button>
+            <button class="eliminar" (click)="onDelete(libro.id)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

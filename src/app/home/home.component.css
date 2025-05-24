@@ -1,0 +1,13 @@
+.caja {
+background-color:#f8f9fa;
+margin: 30px 0;
+padding: 40px;
+border-radius: 10px;
+}
+.caja .titulo {
+    font-size: 36px;
+    margin: 0 0 20px 0;
+}
+.caja .descripcion {
+    font-size: 20px;
+}

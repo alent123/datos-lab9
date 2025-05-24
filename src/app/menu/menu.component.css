@@ -1,0 +1,18 @@
+nav {
+background-color:#dee2e6;
+padding: 10px;
+}
+nav a {
+    color:#343a40;
+    margin-right: 20px;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+nav a:hover {
+    background-color: #343a40;
+    color:#ced4da;
+    text-decoration:underline;
+}
+
+
+
